@@ -1,25 +1,25 @@
 ﻿namespace CalculatorLogic;
 
-public class DescriptiveStatistics : ICalcLogic
+public class DescriptiveStatistics 
 {
     
     private const bool IsPopulation = true;
     private const bool IsSample = false;
     
     
-    public double ComputeSampleStandardDeviation(List<double> valuesList)
+    public static double ComputeSampleStandardDeviation(List<double> valuesList)
     {
         //preq-LOGIC-3
         return ComputeStandardDeviation(valuesList, IsSample);
     }
 
-    public double ComputePopulationStandardDeviation(List<double> valuesList)
+    public static double ComputePopulationStandardDeviation(List<double> valuesList)
     {
         //preq-LOGIC-4
         return ComputeStandardDeviation(valuesList, IsPopulation);
     }
 
-    public double ComputeStandardDeviation(List<double> valuesList, bool isPopulation)
+    private static double ComputeStandardDeviation(List<double> valuesList, bool isPopulation)
     {
         //preq-LOGIC-3 && preq-LOGIC-4
         if(valuesList == null || valuesList.Count == 0)
@@ -32,7 +32,7 @@ public class DescriptiveStatistics : ICalcLogic
         return Math.Sqrt(variance);
     }
 
-    public double ComputeMean(List<double> valuesList)
+    public static double ComputeMean(List<double> valuesList)
     {
         //preq-LOGIC-5
         if (valuesList == null || valuesList.Count == 0)
@@ -45,7 +45,7 @@ public class DescriptiveStatistics : ICalcLogic
         return sumAccumulator / valuesList.Count;
     }
 
-    public double ComputeSquareOfDifferences(List<double> valuesList, double mean)
+    private static double ComputeSquareOfDifferences(List<double> valuesList, double mean)
     {
         if (valuesList == null || valuesList.Count == 0)
              throw new ArgumentException("valuesList parameter cannot be null or empty");
@@ -61,7 +61,7 @@ public class DescriptiveStatistics : ICalcLogic
         return squareAccumulator;
     }
 
-    public double ComputeVariance(double squareOfDifferences, int numValues, bool isPopulation)
+    private static double ComputeVariance(double squareOfDifferences, int numValues, bool isPopulation)
     {
         if (!isPopulation) numValues -= 1;
         
@@ -72,7 +72,7 @@ public class DescriptiveStatistics : ICalcLogic
         return squareOfDifferences / numValues;
     }
 
-    public double ComputeZScore(double userValue, double mean, double standardDeviation)
+    public static double ComputeZScore(double userValue, double mean, double standardDeviation)
     {
         //preq-LOGIC-6
         return (userValue - mean) / standardDeviation;
