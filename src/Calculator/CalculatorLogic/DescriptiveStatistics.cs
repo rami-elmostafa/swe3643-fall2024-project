@@ -7,29 +7,56 @@ public class DescriptiveStatistics
     private const bool IsSample = false;
     
     
-    public static double ComputeSampleStandardDeviation(List<double> valuesList)
+    public static CalculationResult ComputeSampleStandardDeviation(List<double> valuesList)
     {
         //preq-LOGIC-3
         return ComputeStandardDeviation(valuesList, IsSample);
+        
     }
 
-    public static double ComputePopulationStandardDeviation(List<double> valuesList)
+    public static CalculationResult ComputePopulationStandardDeviation(List<double> valuesList)
     {
         //preq-LOGIC-4
         return ComputeStandardDeviation(valuesList, IsPopulation);
     }
 
-    private static double ComputeStandardDeviation(List<double> valuesList, bool isPopulation)
+    private static CalculationResult ComputeStandardDeviation(List<double> valuesList, bool isPopulation)
     {
         //preq-LOGIC-3 && preq-LOGIC-4
-        if(valuesList == null || valuesList.Count == 0)
-            throw new ArgumentException("valuesList parameter cannot be null or empty");
+        const string  PopStdDevOp = "Compute Population Standard Deviation";
+        const string StdDevOp = "Compute Sample Standard Deviation";
 
+        var operation = isPopulation 
+            ? PopStdDevOp 
+            : StdDevOp;
+        
+        if (valuesList == null )
+        {
+            return CalculationResult.GetError(operation, "List cannot be null");
+        }
+        
+        var minReqSamples = isPopulation 
+            ? 2
+            : 1;
+        
+        var label = isPopulation 
+            ? "Population" 
+            : "Sample";
+        
+        
+        if (valuesList.Count < minReqSamples)
+        {
+            return CalculationResult.GetError(operation, $"{label} must have {minReqSamples} or more samples");
+        }
+        
+        
+        
         var mean = ComputeMean(valuesList);
         var squareOfDifferences = ComputeSquareOfDifferences(valuesList, mean);
         var variance = ComputeVariance(squareOfDifferences, valuesList.Count, isPopulation);
         
-        return Math.Sqrt(variance);
+        var result = Math.Sqrt(variance);
+        return CalculationResult.GetSuccess(operation, result);
     }
 
     public static double ComputeMean(List<double> valuesList)
@@ -43,6 +70,23 @@ public class DescriptiveStatistics
             sumAccumulator += value;
         
         return sumAccumulator / valuesList.Count;
+    }
+
+    public static CalculationResult ComputeMean2(List<double>? valuesList)
+    {
+        //preq-LOGIC-5
+        
+        const string operation = "Compute Mean";
+
+        if (valuesList == null || valuesList.Count == 0)
+            return CalculationResult.GetError(operation, "List cannot be empty");
+
+        double sumAccumulator = 0;
+        foreach (var value in valuesList)
+            sumAccumulator += value;
+
+        var result = sumAccumulator / valuesList.Count;
+        return CalculationResult.GetSuccess(operation, result);
     }
 
     private static double ComputeSquareOfDifferences(List<double> valuesList, double mean)
@@ -65,11 +109,12 @@ public class DescriptiveStatistics
     {
         if (!isPopulation) numValues -= 1;
         
-        if(numValues < 1)
+        if(numValues < 0)
             throw new ArgumentException(
-            "numValues is too low (sample size must be >= 2, population size must be >= 1)");
-
-        return squareOfDifferences / numValues;
+            "numValues is too low (Population size must be >= 2, Sample size must be >= 1)");
+        else if (numValues == 0) return 0;
+        var variance = squareOfDifferences / numValues;
+        return variance;
     }
 
     public static double ComputeZScore(double userValue, double mean, double standardDeviation)
