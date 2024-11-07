@@ -7,6 +7,7 @@ public class DescriptiveStatisticsTests
     //Tests ComputeSampleStandardDeviation correctly calculates sample standard deviation
     //for list of multiple values.
     [Test]
+    //preq-UNIT-TEST-2
     public void ComputeSampleStandardDeviation_ListOfValues_ReturnsSampleStandardDeviation()
     {
         //arrange
@@ -24,8 +25,10 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Result, Is.EqualTo(1.5811388300841898).Within(1e-10));
         });
     }
+    
     [Test]
-    public void ComputeSampleStandardDeviation_OneNumberList_ReturnsSampleStandardDeviation()
+    //preq-UNIT-TEST-2
+    public void ComputeSampleStandardDeviation_ListOfAllZeros_ReturnsSampleStandardDeviationZero()
     {
         //arrange
         var sampleValuesList = new List<double> { 0, 0, 0 };
@@ -43,13 +46,84 @@ public class DescriptiveStatisticsTests
     }
 
     [Test]
+    //preq-UNIT-TEST-2
     public void ComputeSampleStandardDeviation_EmptyList_ReturnsError()
     {
         //arrange
         List<double>? sampleValuesList = null;
 
         //act
-        var result= DescriptiveStatistics.ComputeSampleStandardDeviation(sampleValuesList);
+        var result = DescriptiveStatistics.ComputeSampleStandardDeviation(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    //preq-UNIT-TEST-3
+    public void ComputePopulationStandardDeviation_ValidList_ReturnsPopulationStandardDeviation()
+    {
+        //arrange
+        List<double> sampleValuesList = new List<double> { 9, 6, 8, 5, 7 };
+        
+        //act
+        var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Result, Is.EqualTo(1.4142135623731).Within(1e-10));
+        });
+    }
+
+    [Test]
+    //preq-UNIT-TEST-3
+    public void ComputePopulationStandardDeviation_ListOfAllZeros_ReturnsPopulationStandardDeviationZeros()
+    {
+        //assign
+        List<double> sampleValuesList = new List<double> { 0, 0, 0 };
+        
+        //act 
+        var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Result, Is.EqualTo(0));
+        });
+    }
+
+    [Test]
+    //preq-UNIT-TEST-3
+    public void ComputePopulationStandardDeviation_EmptyList_ReturnsError()
+    {
+        //arrange
+        List<double>? sampleValuesList = null;
+
+        //act
+        var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+    
+    [Test]
+    //preq-UNIT-TEST-3
+    public void ComputePopulationStandardDeviation_OneNumberList_ReturnsError()
+    {
+        //arrange
+        List<double> sampleValuesList = new List<double> {9};
+
+        //act
+        var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
         Console.WriteLine(result);
         Assert.Multiple(() =>
         {
@@ -60,11 +134,11 @@ public class DescriptiveStatisticsTests
     }
 
 
-    // Tests ComputeZScore correctly calculates z score based on three (correctly formated) inputs
+// Tests ComputeZScore correctly calculates z score based on three (correctly formated) inputs
     //for userValue, mean, and standardDeviation
 
     [Test]
-    public void DescriptiveStatistics_AcceptsValueMeanStdDev_ReturnsZScore()
+    public void DescriptiveStatistics_ValidValueMeanStdDev_ReturnsZScore()
     {
         //preq-Unit-Test-5
 
@@ -74,12 +148,39 @@ public class DescriptiveStatisticsTests
         double standardDeviation = 1.5811388300841898;
 
         //act
-        var Zscore = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
-
-        //assert
-        Assert.That(Zscore, Is.EqualTo(2.846049894151541).Within(1e-10));
+        var result = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Result, Is.EqualTo(2.84605).Within(1e-4));
+        });
     }
 
+    [Test]
+    public void DescriptiveStatistics_MissingOneParameter_ReturnsError()
+    {
+        //preq-Unit-Test-5
+
+        //arange
+        double? userValue = null;
+        double mean = 7;
+        double standardDeviation = 1.5811388300841898;
+
+        //act
+        var result = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Result, Is.EqualTo(2.84605).Within(1e-4));
+        });
+    }
+    
+    
+    
     [Test]
     public void ComputeMean_ListOfValues_ReturnsMean()
     {

@@ -1,17 +1,17 @@
 ﻿namespace CalculatorLogic;
 
-public class DescriptiveStatistics 
+public class DescriptiveStatistics
 {
-    
+
     private const bool IsPopulation = true;
     private const bool IsSample = false;
-    
-    
+
+
     public static CalculationResult ComputeSampleStandardDeviation(List<double> valuesList)
     {
         //preq-LOGIC-3
         return ComputeStandardDeviation(valuesList, IsSample);
-        
+
     }
 
     public static CalculationResult ComputePopulationStandardDeviation(List<double> valuesList)
@@ -23,38 +23,38 @@ public class DescriptiveStatistics
     private static CalculationResult ComputeStandardDeviation(List<double> valuesList, bool isPopulation)
     {
         //preq-LOGIC-3 && preq-LOGIC-4
-        const string  PopStdDevOp = "Compute Population Standard Deviation";
+        const string PopStdDevOp = "Compute Population Standard Deviation";
         const string StdDevOp = "Compute Sample Standard Deviation";
 
-        var operation = isPopulation 
-            ? PopStdDevOp 
+        var operation = isPopulation
+            ? PopStdDevOp
             : StdDevOp;
-        
-        if (valuesList == null )
+
+        if (valuesList == null)
         {
             return CalculationResult.GetError(operation, "List cannot be null");
         }
-        
-        var minReqSamples = isPopulation 
+
+        var minReqSamples = isPopulation
             ? 2
             : 1;
-        
-        var label = isPopulation 
-            ? "Population" 
+
+        var label = isPopulation
+            ? "Population"
             : "Sample";
-        
-        
+
+
         if (valuesList.Count < minReqSamples)
         {
             return CalculationResult.GetError(operation, $"{label} must have {minReqSamples} or more samples");
         }
-        
-        
-        
+
+
+
         var mean = ComputeMean(valuesList);
         var squareOfDifferences = ComputeSquareOfDifferences(valuesList, mean);
         var variance = ComputeVariance(squareOfDifferences, valuesList.Count, isPopulation);
-        
+
         var result = Math.Sqrt(variance);
         return CalculationResult.GetSuccess(operation, result);
     }
@@ -68,14 +68,14 @@ public class DescriptiveStatistics
         double sumAccumulator = 0;
         foreach (var value in valuesList)
             sumAccumulator += value;
-        
+
         return sumAccumulator / valuesList.Count;
     }
 
     public static CalculationResult ComputeMean2(List<double>? valuesList)
     {
         //preq-LOGIC-5
-        
+
         const string operation = "Compute Mean";
 
         if (valuesList == null || valuesList.Count == 0)
@@ -92,8 +92,8 @@ public class DescriptiveStatistics
     private static double ComputeSquareOfDifferences(List<double> valuesList, double mean)
     {
         if (valuesList == null || valuesList.Count == 0)
-             throw new ArgumentException("valuesList parameter cannot be null or empty");
-        
+            throw new ArgumentException("valuesList parameter cannot be null or empty");
+
         double squareAccumulator = 0;
         foreach (var value in valuesList)
         {
@@ -101,25 +101,27 @@ public class DescriptiveStatistics
             var squareOfDifference = difference * difference;
             squareAccumulator += squareOfDifference;
         }
-        
+
         return squareAccumulator;
     }
 
     private static double ComputeVariance(double squareOfDifferences, int numValues, bool isPopulation)
     {
         if (!isPopulation) numValues -= 1;
-        
-        if(numValues < 0)
+
+        if (numValues < 0)
             throw new ArgumentException(
-            "numValues is too low (Population size must be >= 2, Sample size must be >= 1)");
+                "numValues is too low (Population size must be >= 2, Sample size must be >= 1)");
         else if (numValues == 0) return 0;
         var variance = squareOfDifferences / numValues;
         return variance;
     }
 
-    public static double ComputeZScore(double userValue, double mean, double standardDeviation)
+    public static CalculationResult ComputeZScore(double userValue, double mean, double standardDeviation)
     {
         //preq-LOGIC-6
-        return (userValue - mean) / standardDeviation;
+        const string operation = "Compute Z Score";
+        var result = (userValue - mean) / standardDeviation;
+        return CalculationResult.GetSuccess(operation, result);
     }
 }
