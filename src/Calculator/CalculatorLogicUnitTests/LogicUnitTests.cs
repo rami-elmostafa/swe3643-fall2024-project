@@ -243,6 +243,8 @@ public class DescriptiveStatisticsTests
     [Test]
         public void ComputeSingleLinearRegression_ValidListOfNumbers_ReturnsSingleLinearRegressionEquation()
         {
+            //preq-UNIT-TEST-6
+            
             //arrange
             var sampleValuesList = new List<double> 
             { 
@@ -286,4 +288,23 @@ public class DescriptiveStatisticsTests
                 Assert.That(result.Result, Is.EqualTo("y = "+ 61.2721865 +"x + "+ -39.0619559));
             });
         }
+      
+    [Test]
+    public void ComputeSingleLinearRegression_EmptyListOfNumbers_ReturnsError()
+    {
+    //preq-UNIT-TEST-6
+            
+    //arrange
+    List<double>? sampleValuesList = null;
+
+    //act
+    var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+    Console.WriteLine(result);
+    Assert.Multiple(() =>
+    {
+        //assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(result.Error, Is.Not.Empty);
+    });
+}
     }

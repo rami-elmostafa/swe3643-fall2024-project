@@ -13,6 +13,11 @@ public class LinearRegression
          BO (Y-Intercept) = Y' - B1X'*/
         
         // Ensure the valueList contains even num pairs of (X, Y) values
+        if (valueList == null)
+        {
+            return CalculationResult.GetError(operation, "List cannot be null");
+        }
+        
         if (valueList.Count % 2 != 0)
         {
             return CalculationResult.GetError(operation, "The input list must contain an even number of elements.");
@@ -64,8 +69,11 @@ public class LinearRegression
         var result = $"y = {slope:0.0000000}x + {yIntercept:0.0000000}";
         
         return CalculationResult.GetSuccess(operation, result);
-
-            
-            
     }
+
+   /* public static CalculationResult PredictY(List<double> valueList)
+    {
+        
+    }
+    */
 }
