@@ -121,6 +121,8 @@ public class DescriptiveStatistics
     {
         //preq-LOGIC-6
         const string operation = "Compute Z Score";
+        if (userValue == 0 || mean == 0 || standardDeviation == 0)
+            return CalculationResult.GetError(operation, "Missing one or more parameters");
         var result = (userValue - mean) / standardDeviation;
         return CalculationResult.GetSuccess(operation, result);
     }

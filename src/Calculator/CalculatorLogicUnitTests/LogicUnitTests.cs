@@ -25,7 +25,7 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Result, Is.EqualTo(1.5811388300841898).Within(1e-10));
         });
     }
-    
+
     [Test]
     //preq-UNIT-TEST-2
     public void ComputeSampleStandardDeviation_ListOfAllZeros_ReturnsSampleStandardDeviationZero()
@@ -69,7 +69,7 @@ public class DescriptiveStatisticsTests
     {
         //arrange
         List<double> sampleValuesList = new List<double> { 9, 6, 8, 5, 7 };
-        
+
         //act
         var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
         Console.WriteLine(result);
@@ -86,7 +86,7 @@ public class DescriptiveStatisticsTests
     {
         //assign
         List<double> sampleValuesList = new List<double> { 0, 0, 0 };
-        
+
         //act 
         var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
         Console.WriteLine(result);
@@ -114,13 +114,13 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Error, Is.Not.Empty);
         });
     }
-    
+
     [Test]
     //preq-UNIT-TEST-3
     public void ComputePopulationStandardDeviation_OneNumberList_ReturnsError()
     {
         //arrange
-        List<double> sampleValuesList = new List<double> {9};
+        List<double> sampleValuesList = new List<double> { 9 };
 
         //act
         var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
@@ -138,7 +138,7 @@ public class DescriptiveStatisticsTests
     //for userValue, mean, and standardDeviation
 
     [Test]
-    public void DescriptiveStatistics_ValidValueMeanStdDev_ReturnsZScore()
+    public void ComputeZScore_ValidValueMeanStdDev_ReturnsZScore()
     {
         //preq-Unit-Test-5
 
@@ -159,12 +159,12 @@ public class DescriptiveStatisticsTests
     }
 
     [Test]
-    public void DescriptiveStatistics_MissingOneParameter_ReturnsError()
+    public void ComputeZScore_MissingOneParameter_ReturnsError()
     {
         //preq-Unit-Test-5
 
         //arange
-        double? userValue = null;
+        double userValue = 0;
         double mean = 7;
         double standardDeviation = 1.5811388300841898;
 
@@ -174,13 +174,35 @@ public class DescriptiveStatisticsTests
         Assert.Multiple(() =>
         {
             //assert
-            Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(2.84605).Within(1e-4));
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
         });
     }
-    
-    
-    
+
+    [Test]
+    public void ComputeZScore_MeanEqualZero_ReturnsError()
+    {
+        //preq-Unit-Test-5
+
+        //arange
+        double userValue = 11.5;
+        double mean = 0;
+        double standardDeviation = 1.5811388300841898;
+
+        //act
+        var result = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+
+
+
+
     [Test]
     public void ComputeMean_ListOfValues_ReturnsMean()
     {
@@ -216,4 +238,52 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Error, Is.Not.Empty);
         });
     }
-}
+
+
+    [Test]
+        public void ComputeSingleLinearRegression_ValidListOfNumbers_ReturnsSingleLinearRegressionEquation()
+        {
+            //arrange
+            var sampleValuesList = new List<double> 
+            { 
+                1.47, 52.21,
+
+                1.5, 53.12,
+
+                1.52,54.48,
+
+                1.55,55.84,
+
+                1.57,57.2,
+
+                1.6,58.57,
+
+                1.63,59.93,
+
+                1.65,61.29,
+
+                1.68,63.11,
+
+                1.7,64.47,
+
+                1.73,66.28,
+
+                1.75,68.1,
+
+                1.78,69.92,
+
+                1.8,72.19,
+
+                1.83,74.46,};
+
+            //act
+            var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+            Console.WriteLine(result);
+            Assert.Multiple(() =>
+            {
+                //assert
+                Assert.That(result.IsSuccess, Is.True);
+                Assert.That(result.Result, Is.EqualTo("y = "+ 61.2721865 +"x + "+ -39.0619559));
+            });
+        }
+    }
