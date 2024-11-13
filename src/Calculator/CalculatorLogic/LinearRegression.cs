@@ -45,6 +45,26 @@ public class LinearRegression
                 ycount++;
             }
         }
+        
+        
+        //checks if any of the x's and y's are the same, throws a error if so
+        for(int i=0;i<xcount-1;i++)
+        {
+            if (xList[i] == xList[i + 1])
+            {
+                return CalculationResult.GetError(operation, "X values are the same");
+            }
+        }
+        
+        for(int i=0;i<ycount-1;i++)
+        {
+            if (yList[i] == yList[i + 1])
+            {
+                return CalculationResult.GetError(operation, "Y values are the same");
+            }
+        }
+        
+        
         //compute X'(xMean) and Y'(yMean) for each x and y list
         var Xmean = DescriptiveStatistics.ComputeMean(xList);
         var Ymean = DescriptiveStatistics.ComputeMean(yList);
@@ -71,9 +91,15 @@ public class LinearRegression
         return CalculationResult.GetSuccess(operation, result);
     }
 
-   /* public static CalculationResult PredictY(List<double> valueList)
+    public static CalculationResult PredictYFromEquation(double x, double slope, double yIntercept)
     {
-        
+        //preq-LOGIC-8
+        const string operation = "Predict Y from Equation";
+        if (x == 0 || slope == 0 || yIntercept == 0)
+        {
+            return CalculationResult.GetError(operation, "One of the values is missing (or is a zero)");
+        }
+        var result = (x*slope)+yIntercept;
+        return CalculationResult.GetSuccess(operation, result);
     }
-    */
 }

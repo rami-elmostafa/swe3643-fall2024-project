@@ -126,4 +126,5 @@ public class DescriptiveStatistics
         var result = (userValue - mean) / standardDeviation;
         return CalculationResult.GetSuccess(operation, result);
     }
+    
 }

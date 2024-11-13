@@ -307,4 +307,122 @@ public class DescriptiveStatisticsTests
         Assert.That(result.Error, Is.Not.Empty);
     });
 }
+    
+    [Test]
+    public void ComputeSingleLinearRegression_SameXValues_ReturnsError()
+    {
+        //preq-UNIT-TEST-6
+            
+        //arrange
+        List<double> sampleValuesList = new List<double>()
+        {
+            1,2,
+            1,3,
+            1,4,
+            1,5,
+            1,6,
+            1,7,
+            1,8,
+            1,9,
+            1,10
+        };
+
+        //act
+        var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+    
+    [Test]
+    public void ComputeSingleLinearRegression_SameYValues_ReturnsError()
+    {
+        //preq-UNIT-TEST-6
+            
+        //arrange
+        List<double> sampleValuesList = new List<double>()
+        {
+            12,2,
+            2, 2
+        };
+
+        //act
+        var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+    
+    [Test]
+    public void ComputeSingleLinearRegression_ZeroXAndYPair_ReturnsError()
+    {
+        //preq-UNIT-TEST-6
+            
+        //arrange
+        List<double> sampleValuesList = new List<double>()
+        {
+            0,0,
+            0,0
+        };
+
+        //act
+        var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+    
+    [Test]
+    public void PredictYFromEquation_ValidListOfParameters_ReturnsY()
+    {
+        //preq-UNIT-TEST-7
+            
+        //arrange
+        var x = 1.535;
+        var slope = 61.272186542107434;
+        var yIntercept = -39.061955918838656;
+
+        //act
+        var result = LinearRegression.PredictYFromEquation(x,slope, yIntercept);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Result, Is.EqualTo(54.990850423296244).Within(0.001));
+        });
+    }
+    
+    [Test]
+    public void PredictYFromEquation_InvalidListOfParameters_ReturnsY()
+    {
+        //preq-UNIT-TEST-7
+            
+        //arrange
+        var x = 0;
+        var slope = 61.272186542107434;
+        var yIntercept = -39.061955918838656;
+
+        //act
+        var result = LinearRegression.PredictYFromEquation(x,slope, yIntercept);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
     }
