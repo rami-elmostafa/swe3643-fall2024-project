@@ -22,7 +22,7 @@ public class DescriptiveStatisticsTests
         {
             //assert
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(1.5811388300841898).Within(1e-10));
+            Assert.That(result.Results[0], Is.EqualTo(1.5811388300841898).Within(1e-10));
         });
     }
 
@@ -41,7 +41,7 @@ public class DescriptiveStatisticsTests
         {
             //assert
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(0));
+            Assert.That(result.Results[0], Is.EqualTo(0));
         });
     }
 
@@ -76,7 +76,7 @@ public class DescriptiveStatisticsTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(1.4142135623731).Within(1e-10));
+            Assert.That(result.Results[0], Is.EqualTo(1.4142135623731).Within(1e-10));
         });
     }
 
@@ -93,7 +93,7 @@ public class DescriptiveStatisticsTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(0));
+            Assert.That(result.Results[0], Is.EqualTo(0));
         });
     }
 
@@ -154,7 +154,7 @@ public class DescriptiveStatisticsTests
         {
             //assert
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(2.84605).Within(1e-4));
+            Assert.That(result.Results[0], Is.EqualTo(2.84605).Within(1e-4));
         });
     }
 
@@ -217,7 +217,7 @@ public class DescriptiveStatisticsTests
         {
             //assert
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(7.0).Within(1e-10));
+            Assert.That(result.Results[0], Is.EqualTo(7.0).Within(1e-10));
         });
     }
 
@@ -285,7 +285,9 @@ public class DescriptiveStatisticsTests
             {
                 //assert
                 Assert.That(result.IsSuccess, Is.True);
-                Assert.That(result.Result, Is.EqualTo("y = "+ 61.2721865 +"x + "+ -39.0619559));
+                Assert.That(result.Results[0], Is.EqualTo(61.2721865).Within(1e-7));
+                Assert.That(result.Results[1], Is.EqualTo(-39.0619559).Within(1e-7));
+
             });
         }
       
@@ -385,6 +387,30 @@ public class DescriptiveStatisticsTests
     }
     
     [Test]
+    public void ComputeSingleLinearRegression_UnEvenXYList_ReturnsError()
+    {
+        //preq-UNIT-TEST-6
+            
+        //arrange
+        List<double> sampleValuesList = new List<double>()
+        {
+            1,2,
+            3,
+        };
+
+        //act
+        var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+
+    
+    [Test]
     public void PredictYFromEquation_ValidListOfParameters_ReturnsY()
     {
         //preq-UNIT-TEST-7
@@ -401,7 +427,7 @@ public class DescriptiveStatisticsTests
         {
             //assert
             Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Result, Is.EqualTo(54.990850423296244).Within(0.001));
+            Assert.That(result.Results[0], Is.EqualTo(54.990850423296244).Within(0.001));
         });
     }
     

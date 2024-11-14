@@ -88,7 +88,7 @@ public class LinearRegression
         //Final Equation
         var result = $"y = {slope:0.0000000}x + {yIntercept:0.0000000}";
         
-        return CalculationResult.GetSuccess(operation, result);
+        return CalculationResult.GetSuccess(operation, slope, yIntercept);
     }
 
     public static CalculationResult PredictYFromEquation(double x, double slope, double yIntercept)
