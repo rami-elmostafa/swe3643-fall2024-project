@@ -68,7 +68,7 @@ public class DescriptiveStatisticsTests
     public void ComputePopulationStandardDeviation_ValidList_ReturnsPopulationStandardDeviation()
     {
         //arrange
-        List<double> sampleValuesList = new List<double> { 9, 6, 8, 5, 7 };
+        var sampleValuesList = new List<double> { 9, 6, 8, 5, 7 };
 
         //act
         var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
@@ -85,7 +85,7 @@ public class DescriptiveStatisticsTests
     public void ComputePopulationStandardDeviation_ListOfAllZeros_ReturnsPopulationStandardDeviationZeros()
     {
         //assign
-        List<double> sampleValuesList = new List<double> { 0, 0, 0 };
+        var sampleValuesList = new List<double> { 0, 0, 0 };
 
         //act 
         var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
@@ -120,7 +120,7 @@ public class DescriptiveStatisticsTests
     public void ComputePopulationStandardDeviation_OneNumberList_ReturnsError()
     {
         //arrange
-        List<double> sampleValuesList = new List<double> { 9 };
+        var sampleValuesList = new List<double> { 9 };
 
         //act
         var result = DescriptiveStatistics.ComputePopulationStandardDeviation(sampleValuesList);
@@ -143,9 +143,9 @@ public class DescriptiveStatisticsTests
         //preq-Unit-Test-5
 
         //arange
-        double userValue = 11.5;
+        var userValue = 11.5;
         double mean = 7;
-        double standardDeviation = 1.5811388300841898;
+        var standardDeviation = 1.5811388300841898;
 
         //act
         var result = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
@@ -166,7 +166,7 @@ public class DescriptiveStatisticsTests
         //arange
         double userValue = 0;
         double mean = 7;
-        double standardDeviation = 1.5811388300841898;
+        var standardDeviation = 1.5811388300841898;
 
         //act
         var result = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
@@ -185,9 +185,9 @@ public class DescriptiveStatisticsTests
         //preq-Unit-Test-5
 
         //arange
-        double userValue = 11.5;
+        var userValue = 11.5;
         double mean = 0;
-        double standardDeviation = 1.5811388300841898;
+        var standardDeviation = 1.5811388300841898;
 
         //act
         var result = DescriptiveStatistics.ComputeZScore(userValue, mean, standardDeviation);
@@ -201,8 +201,6 @@ public class DescriptiveStatisticsTests
     }
 
 
-
-
     [Test]
     public void ComputeMean_ListOfValues_ReturnsMean()
     {
@@ -211,7 +209,7 @@ public class DescriptiveStatisticsTests
         var sampleValuesList = new List<double> { 9, 6, 8, 5, 7 };
 
         //act
-        var result = DescriptiveStatistics.ComputeMean2(sampleValuesList);
+        var result = DescriptiveStatistics.ComputeMean(sampleValuesList);
         Console.WriteLine(result);
         Assert.Multiple(() =>
         {
@@ -229,7 +227,7 @@ public class DescriptiveStatisticsTests
         List<double>? sampleValuesList = null;
 
         //act
-        var result = DescriptiveStatistics.ComputeMean2(sampleValuesList);
+        var result = DescriptiveStatistics.ComputeMean(sampleValuesList);
         Console.WriteLine(result);
         Assert.Multiple(() =>
         {
@@ -241,92 +239,92 @@ public class DescriptiveStatisticsTests
 
 
     [Test]
-        public void ComputeSingleLinearRegression_ValidListOfNumbers_ReturnsSingleLinearRegressionEquation()
+    public void ComputeSingleLinearRegression_ValidListOfNumbers_ReturnsSingleLinearRegressionEquation()
+    {
+        //preq-UNIT-TEST-6
+
+        //arrange
+        var sampleValuesList = new List<double>
         {
-            //preq-UNIT-TEST-6
-            
-            //arrange
-            var sampleValuesList = new List<double> 
-            { 
-                1.47, 52.21,
+            1.47, 52.21,
 
-                1.5, 53.12,
+            1.5, 53.12,
 
-                1.52,54.48,
+            1.52, 54.48,
 
-                1.55,55.84,
+            1.55, 55.84,
 
-                1.57,57.2,
+            1.57, 57.2,
 
-                1.6,58.57,
+            1.6, 58.57,
 
-                1.63,59.93,
+            1.63, 59.93,
 
-                1.65,61.29,
+            1.65, 61.29,
 
-                1.68,63.11,
+            1.68, 63.11,
 
-                1.7,64.47,
+            1.7, 64.47,
 
-                1.73,66.28,
+            1.73, 66.28,
 
-                1.75,68.1,
+            1.75, 68.1,
 
-                1.78,69.92,
+            1.78, 69.92,
 
-                1.8,72.19,
+            1.8, 72.19,
 
-                1.83,74.46,};
+            1.83, 74.46
+        };
 
-            //act
-            var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
-            Console.WriteLine(result);
-            Assert.Multiple(() =>
-            {
-                //assert
-                Assert.That(result.IsSuccess, Is.True);
-                Assert.That(result.Results[0], Is.EqualTo(61.2721865).Within(1e-7));
-                Assert.That(result.Results[1], Is.EqualTo(-39.0619559).Within(1e-7));
+        //act
+        var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Results[0], Is.EqualTo(61.2721865).Within(1e-7));
+            Assert.That(result.Results[1], Is.EqualTo(-39.0619559).Within(1e-7));
+        });
+    }
 
-            });
-        }
-      
     [Test]
     public void ComputeSingleLinearRegression_EmptyListOfNumbers_ReturnsError()
     {
-    //preq-UNIT-TEST-6
-            
-    //arrange
-    List<double>? sampleValuesList = null;
+        //preq-UNIT-TEST-6
 
-    //act
-    var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
-    Console.WriteLine(result);
-    Assert.Multiple(() =>
-    {
-        //assert
-        Assert.That(result.IsSuccess, Is.False);
-        Assert.That(result.Error, Is.Not.Empty);
-    });
-}
-    
+        //arrange
+        List<double>? sampleValuesList = null;
+
+        //act
+        var result = LinearRegression.ComputeSingleLinearRegression(sampleValuesList);
+        Console.WriteLine(result);
+        Assert.Multiple(() =>
+        {
+            //assert
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+    }
+
     [Test]
     public void ComputeSingleLinearRegression_SameXValues_ReturnsError()
     {
         //preq-UNIT-TEST-6
-            
+
         //arrange
-        List<double> sampleValuesList = new List<double>()
+        var sampleValuesList = new List<double>
         {
-            1,2,
-            1,3,
-            1,4,
-            1,5,
-            1,6,
-            1,7,
-            1,8,
-            1,9,
-            1,10
+            1, 2,
+            1, 3,
+            1, 4,
+            1, 5,
+            1, 6,
+            1, 7,
+            1, 8,
+            1, 9,
+            1, 10
         };
 
         //act
@@ -339,16 +337,16 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Error, Is.Not.Empty);
         });
     }
-    
+
     [Test]
     public void ComputeSingleLinearRegression_SameYValues_ReturnsError()
     {
         //preq-UNIT-TEST-6
-            
+
         //arrange
-        List<double> sampleValuesList = new List<double>()
+        var sampleValuesList = new List<double>
         {
-            12,2,
+            12, 2,
             2, 2
         };
 
@@ -362,17 +360,17 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Error, Is.Not.Empty);
         });
     }
-    
+
     [Test]
     public void ComputeSingleLinearRegression_ZeroXAndYPair_ReturnsError()
     {
         //preq-UNIT-TEST-6
-            
+
         //arrange
-        List<double> sampleValuesList = new List<double>()
+        var sampleValuesList = new List<double>
         {
-            0,0,
-            0,0
+            0, 0,
+            0, 0
         };
 
         //act
@@ -385,17 +383,17 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Error, Is.Not.Empty);
         });
     }
-    
+
     [Test]
     public void ComputeSingleLinearRegression_UnEvenXYList_ReturnsError()
     {
         //preq-UNIT-TEST-6
-            
+
         //arrange
-        List<double> sampleValuesList = new List<double>()
+        var sampleValuesList = new List<double>
         {
-            1,2,
-            3,
+            1, 2,
+            3
         };
 
         //act
@@ -409,19 +407,19 @@ public class DescriptiveStatisticsTests
         });
     }
 
-    
+
     [Test]
     public void PredictYFromEquation_ValidListOfParameters_ReturnsY()
     {
         //preq-UNIT-TEST-7
-            
+
         //arrange
         var x = 1.535;
         var slope = 61.272186542107434;
         var yIntercept = -39.061955918838656;
 
         //act
-        var result = LinearRegression.PredictYFromEquation(x,slope, yIntercept);
+        var result = LinearRegression.PredictYFromEquation(x, slope, yIntercept);
         Console.WriteLine(result);
         Assert.Multiple(() =>
         {
@@ -430,19 +428,19 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Results[0], Is.EqualTo(54.990850423296244).Within(0.001));
         });
     }
-    
+
     [Test]
     public void PredictYFromEquation_InvalidListOfParameters_ReturnsY()
     {
         //preq-UNIT-TEST-7
-            
+
         //arrange
         var x = 0;
         var slope = 61.272186542107434;
         var yIntercept = -39.061955918838656;
 
         //act
-        var result = LinearRegression.PredictYFromEquation(x,slope, yIntercept);
+        var result = LinearRegression.PredictYFromEquation(x, slope, yIntercept);
         Console.WriteLine(result);
         Assert.Multiple(() =>
         {
@@ -451,4 +449,4 @@ public class DescriptiveStatisticsTests
             Assert.That(result.Error, Is.Not.Empty);
         });
     }
-    }
+}

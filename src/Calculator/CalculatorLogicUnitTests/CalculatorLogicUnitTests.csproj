@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CalculatorLogic\CalculatorLogic.csproj" />
+        <ProjectReference Include="..\CalculatorLogic\CalculatorLogic.csproj"/>
     </ItemGroup>
 
 </Project>

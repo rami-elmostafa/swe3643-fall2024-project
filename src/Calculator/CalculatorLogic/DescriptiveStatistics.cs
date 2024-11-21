@@ -20,7 +20,7 @@ public class DescriptiveStatistics
         return ComputeStandardDeviation(valuesList, IsPopulation);
     }
 
-    private static CalculationResult ComputeStandardDeviation(List<double> valuesList, bool isPopulation)
+    private static CalculationResult ComputeStandardDeviation(List<double>? valuesList, bool isPopulation)
     {
         //preq-LOGIC-3 && preq-LOGIC-4
         const string PopStdDevOp = "Compute Population Standard Deviation";
@@ -48,31 +48,17 @@ public class DescriptiveStatistics
         {
             return CalculationResult.GetError(operation, $"{label} must have {minReqSamples} or more samples");
         }
-
-
-
-        var mean = ComputeMean(valuesList);
-        var squareOfDifferences = ComputeSquareOfDifferences(valuesList, mean);
+        
+        var meanResult = ComputeMean(valuesList);
+        
+        var squareOfDifferences = ComputeSquareOfDifferences(valuesList, meanResult.Results[0]);
         var variance = ComputeVariance(squareOfDifferences, valuesList.Count, isPopulation);
 
         var result = Math.Sqrt(variance);
         return CalculationResult.GetSuccess(operation, result);
     }
 
-    public static double ComputeMean(List<double> valuesList)
-    {
-        //preq-LOGIC-5
-        if (valuesList == null || valuesList.Count == 0)
-            throw new ArgumentException("valuesList parameter cannot be null or empty");
-
-        double sumAccumulator = 0;
-        foreach (var value in valuesList)
-            sumAccumulator += value;
-
-        return sumAccumulator / valuesList.Count;
-    }
-
-    public static CalculationResult ComputeMean2(List<double>? valuesList)
+    public static CalculationResult ComputeMean(List<double>? valuesList)
     {
         //preq-LOGIC-5
 
@@ -88,12 +74,9 @@ public class DescriptiveStatistics
         var result = sumAccumulator / valuesList.Count;
         return CalculationResult.GetSuccess(operation, result);
     }
-
+    
     private static double ComputeSquareOfDifferences(List<double> valuesList, double mean)
     {
-        if (valuesList == null || valuesList.Count == 0)
-            throw new ArgumentException("valuesList parameter cannot be null or empty");
-
         double squareAccumulator = 0;
         foreach (var value in valuesList)
         {
@@ -108,11 +91,7 @@ public class DescriptiveStatistics
     private static double ComputeVariance(double squareOfDifferences, int numValues, bool isPopulation)
     {
         if (!isPopulation) numValues -= 1;
-
-        if (numValues < 0)
-            throw new ArgumentException(
-                "numValues is too low (Population size must be >= 2, Sample size must be >= 1)");
-        else if (numValues == 0) return 0;
+        
         var variance = squareOfDifferences / numValues;
         return variance;
     }

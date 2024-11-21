@@ -13,9 +13,9 @@ public class LinearRegression
          BO (Y-Intercept) = Y' - B1X'*/
         
         // Ensure the valueList contains even num pairs of (X, Y) values
-        if (valueList == null)
+        if (valueList == null || valueList.Count == 0)
         {
-            return CalculationResult.GetError(operation, "List cannot be null");
+            return CalculationResult.GetError(operation, "List cannot be null or empty");
         }
         
         if (valueList.Count % 2 != 0)
@@ -66,8 +66,11 @@ public class LinearRegression
         
         
         //compute X'(xMean) and Y'(yMean) for each x and y list
-        var Xmean = DescriptiveStatistics.ComputeMean(xList);
-        var Ymean = DescriptiveStatistics.ComputeMean(yList);
+        var XmeanResult = DescriptiveStatistics.ComputeMean(xList);
+        var YmeanResult = DescriptiveStatistics.ComputeMean(yList);
+
+        var Xmean = XmeanResult.Results[0];
+        var Ymean = YmeanResult.Results[0];
 
         // calculate numerator and denominator of B1(SLOPE) equation
         double numerator = 0 ;
@@ -84,9 +87,6 @@ public class LinearRegression
         
         //calculate B0 (y-intercept) 
         var yIntercept = Ymean - slope * Xmean;
-        
-        //Final Equation
-        var result = $"y = {slope:0.0000000}x + {yIntercept:0.0000000}";
         
         return CalculationResult.GetSuccess(operation, slope, yIntercept);
     }
