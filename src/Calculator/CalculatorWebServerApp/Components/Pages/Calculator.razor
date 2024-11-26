@@ -3,8 +3,8 @@
         <div class="col-10">
             <h1>Calculator</h1>
         </div>
-        <div class="col-12">
-            <button class="btn btn-secondary" @onclick="ClearData">Clear</button>
+        <div class="col-2">
+            <button @onclick="ClearData">Clear</button>
         </div>
     </div>
     <div class="row">
@@ -17,13 +17,55 @@
     <div class="row">
         <div class="col-12">
             <textarea
-                class="form-control"
-                rows="3"
-                @bind="@Data">@Data></textarea>
+                    class="form-control"
+                    rows="3"
+                    @bind="@Data">@Data</textarea>
+        </div>
+        <hr/>
+        <h3>Descriptive Statistics</h3>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-12">
+                <button @onclick="ComputeSampleStandardDeviationButton">Compute Sample Standard Deviation | one value per line</button>
+            </div>
+            <br>
+            <br/>
         </div>
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary" @onclick="HandleDataChange">Compute</button>
+                <button @onclick="ComputePopulationStandardDeviationButton">Compute Population Standard Deviation | one value per line</button>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-12">
+                <button @onclick="ComputeMeanButton">Compute Mean | one value per line</button>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-12">
+                <button @onclick="ComputeZScoreButton">Compute Z Score | value, mean, stdDev on one line</button>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <h3>Single Linear Regression</h3>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-12">
+                <button @onclick="ComputeSingleLinearRegressionButton">Compute Single Linear Regression Formula | one x,y pair per line</button>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-12">
+                <button @onclick="PredictYButton">Predict Y from Linear Regression Formula | x, m, b on one line</button>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ public partial class Calculator : ComponentBase
     
     private string Message { get; set; } = "Enter values below, then select operation";
     
-    private void HandleDataChange()
+    private void ComputeMeanButton()
     { 
         var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
         
@@ -19,9 +19,83 @@ public partial class Calculator : ComponentBase
        if (parsedValues.Success)
        {
            var numberResult = result.Results[0];
-           var stringOperation = "Sample Standard Deviation";
-           Message = stringOperation + numberResult;
-       }else Message = "Error";
+           var stringOperation = "Mean";
+           Message = stringOperation + "\n" +numberResult;
+       }else Message = result.Error;
+    }
+    private void ComputeSampleStandardDeviationButton()
+    { 
+        var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
+        
+        var result = DescriptiveStatistics.ComputeSampleStandardDeviation(parsedValues.Values.ToList());
+       
+        if (parsedValues.Success)
+        {
+            var numberResult = result.Results[0];
+            var stringOperation = "Sample Standard Deviation";
+            Message = stringOperation + "\n" +numberResult;
+        }else Message = result.Error;
+    }
+    private void ComputePopulationStandardDeviationButton()
+    { 
+        var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
+        
+        var result = DescriptiveStatistics.ComputeSampleStandardDeviation(parsedValues.Values.ToList());
+       
+        if (parsedValues.Success)
+        {
+            var numberResult = result.Results[0];
+            var stringOperation = "Population Standard Deviation";
+            Message = stringOperation + "\n" +numberResult;
+        }else Message = result.Error;
+    }
+    private void ComputeZScoreButton()
+    { 
+        var parsedValues = UserValueFormatter.ParseOneValuePerComma(Data);
+        var userValue = parsedValues.Values[0];
+        var mean = parsedValues.Values[1];
+        var stdDev = parsedValues.Values[2];
+
+        
+        var result = DescriptiveStatistics.ComputeZScore(userValue, mean, stdDev);
+       
+        if (parsedValues.Success)
+        {
+            var numberResult = result.Results[0];
+            var stringOperation = "Z-Score";
+            Message = stringOperation + "\n" +numberResult;
+        }else Message = result.Error;
+    }
+    private void ComputeSingleLinearRegressionButton()
+    { 
+        var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
+        
+        var result = LinearRegression.ComputeSingleLinearRegression(parsedValues.Values.ToList());
+
+       
+        if (parsedValues.Success)
+        {
+            var numberResult = result.Results[0];
+            var stringOperation = "Compute Single Linear Regression Formula: ";
+            Message = stringOperation + "\n" +numberResult;
+        }else Message = result.Error;
+    }
+    private void PredictYButton()
+    { 
+        var parsedValues = UserValueFormatter.ParseOneValuePerComma(Data);
+        var x = parsedValues.Values[0];
+        var slope = parsedValues.Values[1];
+        var yIntercept = parsedValues.Values[2];
+
+        
+        var result = LinearRegression.PredictYFromEquation(x,slope, yIntercept);
+       
+        if (parsedValues.Success)
+        {
+            var numberResult = result.Results[0];
+            var stringOperation = "Predict Y from Linear Regression Formula: ";
+            Message = stringOperation + "\n" +numberResult;
+        }else Message = result.Error;
     }
 
     private void ClearData()

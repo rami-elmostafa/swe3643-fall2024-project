@@ -24,23 +24,27 @@ public class UserValueFormatter
         }
 
         return (true, result.ToArray());
+    }
 
+    public static (bool Success, double[] Values) ParseOneValuePerComma(string values)
+    {
+        if (string.IsNullOrWhiteSpace(values)) return (true, []);
 
-        // var data = new List<double>();
-        // var errorMsg = string.Empty;
-        //
-        // foreach (var value in values)
-        // {
-        //     if (double.TryParse(value.Split('\n'), out var result))
-        //     {
-        //         data.Add(result);
-        //     }
-        // }
-        // if (values.Count == 0)
-        // {
-        //     var mean = DescriptiveStatistics.ComputeMean(data);
-        // }
-        //
-        // return CalculationResult.GetSuccess(DescriptiveStatistics.ComputeMean(data));
+        var linesArray = values.Split(',');
+
+        var result = new List<double>();
+
+        foreach (var line in linesArray)
+        {
+            if (string.IsNullOrWhiteSpace(line)) continue;
+
+            if (double.TryParse(line, out var resultDouble))
+                result.Add(resultDouble);
+            else
+                return (false, []);
+        }
+
+        return (true, result.ToArray());
+
     }
 }
