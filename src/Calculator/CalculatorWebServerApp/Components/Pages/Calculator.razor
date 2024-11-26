@@ -1,1 +1,30 @@
-﻿<textarea @oninput="HandleDataChange">@Data</textarea>
+﻿<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <h1>Calculator</h1>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-secondary" @onclick="ClearData">Clear</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+                @Message
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <textarea
+                class="form-control"
+                rows="3"
+                @bind="@Data">@Data></textarea>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" @onclick="HandleDataChange">Compute</button>
+            </div>
+        </div>
+    </div>
+</div>

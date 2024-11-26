@@ -4,11 +4,12 @@ namespace CalculatorLogic;
 
 public class UserValueFormatter
 {
+
     public static (bool Success, double[] Values) ParseOneValuePerLine(string values)
     {
         if (string.IsNullOrWhiteSpace(values)) return (true, []);
 
-        var linesArray = values.Split(Environment.NewLine);
+        var linesArray = values.Split('\n');
 
         var result = new List<double>();
 

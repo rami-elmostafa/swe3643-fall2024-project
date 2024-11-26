@@ -1,17 +1,33 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using CalculatorLogic;
+using Microsoft.AspNetCore.Components;
 
 namespace CalculatorWebServerApp.Components.Pages;
 
 public partial class Calculator : ComponentBase
 {
-    private string Data { get; set; } = "1,2\n3,4";
-
-    private void HandleDataChange(ChangeEventArgs args)
-    {
-        Data = args.Value?.ToString() ?? string.Empty;
-        var pairs = Data.Split("\n");
+    
+    private string Data { get; set; } = "";
+    
+    private string Message { get; set; } = "Enter values below, then select operation";
+    
+    private void HandleDataChange()
+    { 
+        var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
         
+       var result = DescriptiveStatistics.ComputeMean(parsedValues.Values.ToList());
+       
+       if (parsedValues.Success)
+       {
+           var numberResult = result.Results[0];
+           var stringOperation = "Sample Standard Deviation";
+           Message = stringOperation + numberResult;
+       }else Message = "Error";
     }
 
-    public sealed record XY(double X, double Y);
+    private void ClearData()
+    {
+        Data = string.Empty;
+        Message = "Enter values below, then select operation";
+    }
+
 }
