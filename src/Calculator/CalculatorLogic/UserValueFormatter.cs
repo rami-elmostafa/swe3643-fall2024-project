@@ -7,7 +7,7 @@ public class UserValueFormatter
 
     public static (bool Success, double[] Values) ParseOneValuePerLine(string values)
     {
-        if (string.IsNullOrWhiteSpace(values)) return (true, []);
+        if (string.IsNullOrWhiteSpace(values)) return (false, []);
 
         var linesArray = values.Split('\n');
 
@@ -16,6 +16,8 @@ public class UserValueFormatter
         foreach (var line in linesArray)
         {
             if (string.IsNullOrWhiteSpace(line)) continue;
+            
+            if(line.Contains(',')) return (false, []);
 
             if (double.TryParse(line, out var resultDouble))
                 result.Add(resultDouble);
@@ -28,7 +30,7 @@ public class UserValueFormatter
 
     public static (bool Success, double[] Values) ParseOneValuePerComma(string values)
     {
-        if (string.IsNullOrWhiteSpace(values)) return (true, []);
+        if (string.IsNullOrWhiteSpace(values)) return (false, []);
 
         var linesArray = values.Split(',');
 
