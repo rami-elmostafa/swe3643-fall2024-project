@@ -47,4 +47,5 @@ public class UserValueFormatter
         return (true, result.ToArray());
 
     }
+    
 }

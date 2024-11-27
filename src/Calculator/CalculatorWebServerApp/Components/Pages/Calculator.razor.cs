@@ -9,7 +9,6 @@ public partial class Calculator : ComponentBase
     private string Data { get; set; } = "";
     
     private string Message { get; set; } = "Enter values below, then select operation";
-    
     private void ComputeMeanButton()
     { 
         var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
@@ -67,17 +66,19 @@ public partial class Calculator : ComponentBase
         }else Message = result.Error;
     }
     private void ComputeSingleLinearRegressionButton()
-    { 
-        var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
-        
+    {
+        var parsedValues = UserValueFormatter.ParseOneValuePerComma(Data);
         var result = LinearRegression.ComputeSingleLinearRegression(parsedValues.Values.ToList());
-
-       
-        if (parsedValues.Success)
+        if (result.Error.Equals("List cannot be null or empty"))
         {
-            var numberResult = result.Results[0];
+            Message = "Be sure to follow format of x,y, newline x,y, ...";
+        }
+        else if(parsedValues.Success)
+        {
+            var slope = result.Results[0];
+            var yIntercept = result.Results[1];
             var stringOperation = "Compute Single Linear Regression Formula: ";
-            Message = stringOperation + "\n" +numberResult;
+            Message = stringOperation + "\n" + "y = " + slope + "x" + "\n" + "+ " + yIntercept;
         }else Message = result.Error;
     }
     private void PredictYButton()
@@ -93,7 +94,7 @@ public partial class Calculator : ComponentBase
         if (parsedValues.Success)
         {
             var numberResult = result.Results[0];
-            var stringOperation = "Predict Y from Linear Regression Formula: ";
+            var stringOperation = "Single Linear Regression Prediction: ";
             Message = stringOperation + "\n" +numberResult;
         }else Message = result.Error;
     }
