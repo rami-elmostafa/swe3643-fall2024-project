@@ -52,7 +52,14 @@ public partial class Calculator : ComponentBase
             SetError("Invalid input: No data provided. Please enter one value per line.",true);
             return;
         }
+        
         var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
+
+        if (parsedValues.Values.Length == 1)
+        {
+            SetError("Invalid input: Please input more than one number", true);
+            return;
+        }
         
         if (!parsedValues.Success || parsedValues.Values.Length == 0)
         {
@@ -82,6 +89,12 @@ public partial class Calculator : ComponentBase
             return;
         }
         var parsedValues = UserValueFormatter.ParseOneValuePerLine(Data);
+        
+        if (parsedValues.Values.Length == 1)
+        {
+            SetError("Invalid input: Please input more than one number", true);
+            return;
+        }
         
         if (!parsedValues.Success || parsedValues.Values.Length == 0)
         {
