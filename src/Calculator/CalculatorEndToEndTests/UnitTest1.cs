@@ -35,8 +35,7 @@ public class Tests : PageTest
 
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
-        Assert.That(alertMessage, Does.Contain("Sample Standard Deviation"));
-        Assert.That(alertMessage, Does.Contain("3.060787652326"));
+        Assert.That(alertMessage, Is.EqualTo("Sample Standard Deviation\n3.0607876523260447"));
 
         // Verify the alert class
         var alertClass = await Page.Locator("div.alert").GetAttributeAsync("class");
