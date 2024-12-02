@@ -178,3 +178,4 @@ Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration:
 [Project Presentation on Youtube] ()
 
 - ADD THAT YOU MUST BE RUNNING APPLICATION WHILE RUNNIG END TO END TESTS
+- Include ERROR COMMON FOR E2E
