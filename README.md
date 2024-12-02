@@ -36,7 +36,7 @@ To prepare your environment to execute this application:
 
   4. From your command line or terminal, type `dotnet --version`. Assuming dotnet is properly installed, you will see something like the following: (windows example)
 
-       ![image-20241201152625243](C:\Users\ramie\AppData\Roaming\Typora\typora-user-images\image-20241201152625243.png)
+       ![image-20241201152625243]("C:\Users\ramie\Pictures\Screenshots\Screenshot 2024-12-01 152613.png") 
 
   5. From your command line or terminal, type `git --version`. Assuming `git` is properly installed, you will see something like the following: (macOS terminal example)[![image-20240822072904716](https://github.com/jeff-adkisson/swe-3643-fall-2024/raw/main/homework/homework-1-assets/image-20240822072904716.png)](https://github.com/jeff-adkisson/swe-3643-fall-2024/blob/main/homework/homework-1-assets/image-20240822072904716.png) 
 
