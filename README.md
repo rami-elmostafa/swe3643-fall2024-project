@@ -121,9 +121,7 @@ To prepare your environment to execute this application:
 
      **The output should look like the following:**
 
-     ```bash
-     ```
-     
+     ```bash $ dotnet test
      $ dotnet test
      
      Starting test execution, please wait...
@@ -136,11 +134,7 @@ To prepare your environment to execute this application:
      Tests}
      
      Passed!  - Failed:     0, Passed:   22, Skipped:     0, Total:   22, Duration: 39 ms - CalculatorLogicUnitTests.dll (net8.0)
-     
-     ``` 
      ```
-     
-     
 
 
 
@@ -170,18 +164,23 @@ To prepare your environment to execute this application:
 
      **The output should look like the following: ** 
 
-  dotnet test
+```bash
+  ```bash dotnet test
   Determining projects to restore...
   All projects are up-to-date for restore.
   CalculatorEndToEndTests -> /Users/rami/projects/swe-3643-spring-2024-project/src/Calculator/CalculatorEndToEndTests/bin/Debug/net8.0/CalculatorEndToEndTests.dll
 Test run for /Users/rami/projects/swe-3643-spring-2024-project/src/Calculator/CalculatorEndToEndTests/bin/Debug/net8.0/CalculatorEndToEndTests.dll (.NETCoreApp,Version=v8.0)
 Microsoft (R) Test Execution Command Line Tool Version 17.8.0 (arm64)
 Copyright (c) Microsoft Corporation.  All rights reserved.
+  ```
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 2 s - CalculatorEndToEndTests.dll (net8.0)
+```
+
+
 
 
 

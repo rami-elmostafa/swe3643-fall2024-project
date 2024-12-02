@@ -26,6 +26,9 @@ public class Tests : PageTest
         //preq-E2E-TEST-6
         // Navigate to the calculator page
         await Page.GotoAsync("http://localhost:5206/");
+        
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
 
         // Input the sample data into the textarea
         string inputData = "9\n2\n5\n4\n12\n7\n8\n11\n9\n3\n7\n4\n12\n5\n4\n10\n9\n6\n9\n4";
@@ -49,6 +52,9 @@ public class Tests : PageTest
         //preq-E2E-TEST-7
         // Navigate to the calculator page
         await Page.GotoAsync("http://localhost:5206/");
+        
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
 
         // Input the sample data into the textarea
         string inputData = "";
@@ -72,6 +78,9 @@ public class Tests : PageTest
         //preq-E2E-TEST-8
         // Navigate to the calculator page
         await Page.GotoAsync("http://localhost:5206/");
+        
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
 
         // Input the sample data into the textarea
         string inputData = "1";
@@ -89,7 +98,7 @@ public class Tests : PageTest
         Assert.That(alertClass, Does.Contain("alert-danger")); // Change to "alert-danger" if testing error cases
     }
     
-    [Test]
+    /*[Test]
     public async Task CalculatorWebUi_ComputeMean_ReturnsCorrectResult()
     {
         //preq-E2E-TEST-9
@@ -111,6 +120,37 @@ public class Tests : PageTest
         var alertClass = await Page.Locator("div.alert").GetAttributeAsync("class");
         Assert.That(alertClass, Does.Contain("alert-warning")); // Change to "alert-danger" if testing error cases
     }
+    */
+    
+    [Test]
+    public async Task CalculatorWebUi_ComputeMean_ReturnsCorrectResult()
+    {
+        // Navigate to the calculator page
+        await Page.GotoAsync("http://localhost:5206/");
+
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
+
+        // Input the sample data into the textarea
+        string inputData = "9\n2\n5\n4\n12\n7\n8\n11\n9\n3\n7\n4\n12\n5\n4\n10\n9\n6\n9\n4";
+        await Page.GetByRole(AriaRole.Textbox).FillAsync(inputData);
+
+        // Debugging: Verify the textarea content
+        var textareaContent = await Page.GetByRole(AriaRole.Textbox).InputValueAsync();
+        Assert.That(textareaContent, Is.EqualTo(inputData), "The input data was not filled correctly in the textarea.");
+
+        // Click the button to compute the mean
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Mean | one value per line" }).ClickAsync();
+
+        // Verify the alert message content
+        var alertMessage = await Page.Locator("div.alert").TextContentAsync();
+        Assert.That(alertMessage, Is.EqualTo("Mean\n7"), "The computed mean does not match the expected value.");
+
+        // Verify the alert class
+        var alertClass = await Page.Locator("div.alert").GetAttributeAsync("class");
+        Assert.That(alertClass, Does.Contain("alert-warning"));
+    }
+
     
     [Test]
     public async Task CalculatorWebUi_ComputeZScore_ReturnsCorrectResult()
@@ -119,9 +159,16 @@ public class Tests : PageTest
         // Navigate to the calculator page
         await Page.GotoAsync("http://localhost:5206/");
 
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
+        
         // Input the sample data into the textarea
         string inputData = "5.5,7,3.060787652326";
         await Page.GetByRole(AriaRole.Textbox).FillAsync(inputData);
+        
+        // Debugging: Verify the textarea content
+        var textareaContent = await Page.GetByRole(AriaRole.Textbox).InputValueAsync();
+        Assert.That(textareaContent, Is.EqualTo(inputData), "The input data was not filled correctly in the textarea.");
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Z Score | value, mean, stdDev on one line" }).ClickAsync();
@@ -141,6 +188,9 @@ public class Tests : PageTest
         //preq-E2E-TEST-11
         // Navigate to the calculator page
         await Page.GotoAsync("http://localhost:5206/");
+        
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
 
         // Input the sample data into the textarea
         string inputData = "5,3,\n3,2,\n2,15,\n1,12.3,\n7.5,-3,\n4,5,\n3,17,\n4,3,\n6.42,4,\n34,5,\n12,17,\n3,-1";
@@ -149,6 +199,10 @@ public class Tests : PageTest
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Single Linear Regression Formula | one x,y pair per line" }).ClickAsync();
 
+        // Debugging: Verify the textarea content
+        var textareaContent = await Page.GetByRole(AriaRole.Textbox).InputValueAsync();
+        Assert.That(textareaContent, Is.EqualTo(inputData), "The input data was not filled correctly in the textarea.");
+        
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Compute Single Linear Regression Formula: \ny = -0.045961532930936376x\n+ 6.933587781374593"));
@@ -164,6 +218,9 @@ public class Tests : PageTest
         //preq-E2E-TEST-12
         // Navigate to the calculator page
         await Page.GotoAsync("http://localhost:5206/");
+        
+        // Ensure the page and elements are fully loaded
+        await Page.WaitForSelectorAsync("textarea");
 
         // Input the sample data into the textarea
         string inputData = "6,-0.04596,6.9336";
