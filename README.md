@@ -188,12 +188,12 @@ Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration:
 
 Microsoft.Playwright.PlaywrightException : Executable doesn't exist at /Users/jeff/Library/Caches/ms-playwright/chromium-1028/chrome-mac/Chromium.app/Contents/MacOS/Chromium
 ╔════════════════════════════════════════════════════════════╗
-║ Looks like Playwright was just installed or updated.                                                                        ║
-║ Please run the following command to download new browsers:                                                  ║
-║                                                                                                                                                                    ║
-║     pwsh bin/Debug/netX/playwright.ps1 install                                                                                 ║
-║                                                                                                                                                                    ║
-║ <3 Playwright Team                                                                                                                                ║
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                                                                                                                                  ║
+║     pwsh bin/Debug/netX/playwright.ps1 install             ║
+║                                                                                                                                                                  ║
+║ <3 Playwright Team                                         ║
 ╚════════════════════════════════════════════════════════════╝
 
 
