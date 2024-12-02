@@ -121,18 +121,26 @@ To prepare your environment to execute this application:
 
      **The output should look like the following:**
 
+     ```bash
+     ```
+     
      $ dotnet test
-
+     
      Starting test execution, please wait...
      A total of 1 test files matched the specified pattern.
      Starting test execution, please wait...
      A total of 1 test files matched the specified pattern.
-
+     
      {All 
-
+     
      Tests}
-
+     
      Passed!  - Failed:     0, Passed:   22, Skipped:     0, Total:   22, Duration: 39 ms - CalculatorLogicUnitTests.dll (net8.0)
+     
+     ``` 
+     ```
+     
+     
 
 
 
