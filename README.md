@@ -34,11 +34,11 @@ To prepare your environment to execute this application:
     - Mac OS (Terminal) [https://support.apple.com/en-kg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal%20for%20me-,Open%20Terminal,%2C%20then%20double%2Dclick%20Terminal](https://support.apple.com/en-kg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Terminal for me-,Open Terminal,%2C then double-click Terminal).
     - Linux This will be specific to your Linux distribution. Google for help if you cannot find your Terminal.
 
-    4. From your command line or terminal, type `dotnet --version`. Assuming dotnet is properly installed, you will see something like the following: (windows example)
+  4. From your command line or terminal, type `dotnet --version`. Assuming dotnet is properly installed, you will see something like the following: (windows example)
 
        ![image-20241201152625243](C:\Users\ramie\AppData\Roaming\Typora\typora-user-images\image-20241201152625243.png)
 
-    5. From your command line or terminal, type `git --version`. Assuming `git` is properly installed, you will see something like the following: (macOS terminal example)[![image-20240822072904716](https://github.com/jeff-adkisson/swe-3643-fall-2024/raw/main/homework/homework-1-assets/image-20240822072904716.png)](https://github.com/jeff-adkisson/swe-3643-fall-2024/blob/main/homework/homework-1-assets/image-20240822072904716.png) 
+  5. From your command line or terminal, type `git --version`. Assuming `git` is properly installed, you will see something like the following: (macOS terminal example)[![image-20240822072904716](https://github.com/jeff-adkisson/swe-3643-fall-2024/raw/main/homework/homework-1-assets/image-20240822072904716.png)](https://github.com/jeff-adkisson/swe-3643-fall-2024/blob/main/homework/homework-1-assets/image-20240822072904716.png) 
 
 #### To configure Playwright for end-to-end testing: 
 
