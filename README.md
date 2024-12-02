@@ -40,7 +40,7 @@ To prepare your environment to execute this application:
 
     5. From your command line or terminal, type `git --version`. Assuming `git` is properly installed, you will see something like the following: (macOS terminal example)[![image-20240822072904716](https://github.com/jeff-adkisson/swe-3643-fall-2024/raw/main/homework/homework-1-assets/image-20240822072904716.png)](https://github.com/jeff-adkisson/swe-3643-fall-2024/blob/main/homework/homework-1-assets/image-20240822072904716.png) 
 
-To configure Playwright for end-to-end testing: 
+#### To configure Playwright for end-to-end testing: 
 
 1. Install necessary Playwright dependencies, from your command line or terminal, type
 
@@ -107,6 +107,8 @@ To configure Playwright for end-to-end testing:
 
    - `cd swe3643-fall2024-project`
 
+     *Tip: To go return to previous directory in windows command line, use `cd ../`*
+
 3. To run the Unit Tests for the Calculator Application, ensure you are in the Calculator Unit Tests directory by entering the following in the command line or terminal (making sure you are in root directory of `swe3643-fall2024-project`)
 
    - `cd src\Calculator\CalculatorLogicUnitTests`
@@ -142,13 +144,15 @@ To configure Playwright for end-to-end testing:
 
 ## Executing End-To-End Tests
 
-1. (If already cloned skip to step 3) Clone the Repository: In command line, enter the following 
-   - `git clone https://github.com/rami-elmostafa/swe3643-fall2024-project.git`
-2. Navigate to repository folder: In the command line, enter the following
-   - `cd swe3643-fall2024-project`
-3. To run the End To End Tests for the Calculator Application, ensure you are in the Calculator End To End Tests directory by entering the following in the command line or terminal (ensure you are in root directory of `swe3643-fall2024-project`) 
+1. The web application MUST be running in order to execute End To End tests, if not already running, go back to 
+   - [Run Web Application](#executing-the-web-application)  
+2. On the top of the command prompt window, open a new command prompt tab (KEEP THE CURRENT PROMPT- as you need the web app to be running)
 
-- `cd src\Calculator\CalculatorEndToEndTests`
+2. To run the End To End Tests for the Calculator Application, ensure you are in the Calculator End To End Tests directory by entering the following in the command line or terminal (ensure you are in root directory of `swe3643-fall2024-project`) 
+
+- `cd swe3643-fall2024-project\src\Calculator\CalculatorEndToEndTests`
+
+  *Tip: To go return to previous directory in windows command line, use `cd ../`*
 
 2. To run the tests, enter the following to the command line or terminal
 
@@ -173,9 +177,22 @@ Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration:
 
 
 
+**TROUBLE HANDLING**  
+
+- If you see output similar to the following, you most likely forgot a step from [configure Playwright for end to end testing](#to-configure-playwright-for-end-to-end-testing) 
+
+Microsoft.Playwright.PlaywrightException : Executable doesn't exist at /Users/jeff/Library/Caches/ms-playwright/chromium-1028/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.                                                                        ║
+║ Please run the following command to download new browsers:                                                  ║
+║                                                                                                                                                                    ║
+║     pwsh bin/Debug/netX/playwright.ps1 install                                                                                 ║
+║                                                                                                                                                                    ║
+║ <3 Playwright Team                                                                                                                                ║
+╚════════════════════════════════════════════════════════════╝
+
+
+
 ## Final Video Presentation
 
 [Project Presentation on Youtube] ()
-
-- ADD THAT YOU MUST BE RUNNING APPLICATION WHILE RUNNIG END TO END TESTS
-- Include ERROR COMMON FOR E2E
