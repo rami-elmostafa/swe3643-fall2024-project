@@ -172,8 +172,6 @@ To prepare your environment to execute this application:
 Test run for /Users/rami/projects/swe-3643-spring-2024-project/src/Calculator/CalculatorEndToEndTests/bin/Debug/net8.0/CalculatorEndToEndTests.dll (.NETCoreApp,Version=v8.0)
 Microsoft (R) Test Execution Command Line Tool Version 17.8.0 (arm64)
 Copyright (c) Microsoft Corporation.  All rights reserved.
-  ```
-
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
@@ -181,7 +179,7 @@ Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration:
 ```
 
 
-
+```
 
 
 **TROUBLE HANDLING**  
@@ -203,3 +201,5 @@ Microsoft.Playwright.PlaywrightException : Executable doesn't exist at /Users/je
 ## Final Video Presentation
 
 [Project Presentation on Youtube] ()
+
+```
