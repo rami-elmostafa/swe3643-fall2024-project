@@ -89,7 +89,8 @@ To prepare your environment to execute this application:
 
      You should see output similar to this: 
 
-     ![Screenshot 2024-12-01 163325](C:\Users\ramie\Downloads\Screenshot 2024-12-01 163325.png)
+    ![Screenshot 2024-12-01 163325](https://github.com/user-attachments/assets/5274b4dc-3435-4685-a04c-753dce109c77)
+
 
 5. After the application starts, launch a browser and connect to http://localhost:5206
 
@@ -143,7 +144,8 @@ To prepare your environment to execute this application:
 
 *Coverage achieved in Calculator Logic module is 100%, this means 100% test coverage of all statements and paths in calculator logic.* 
 
-![image-20241201172600771](C:\Users\ramie\AppData\Roaming\Typora\typora-user-images\image-20241201172600771.png)
+![Screenshot 2024-12-01 172546](https://github.com/user-attachments/assets/fb2222af-d15a-4c13-a9a7-9e935e45c84d)
+
 
 ## Executing End-To-End Tests
 
