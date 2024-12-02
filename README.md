@@ -165,7 +165,7 @@ To prepare your environment to execute this application:
      **The output should look like the following: ** 
 
 ```bash
-  ```bash dotnet test
+  dotnet test
   Determining projects to restore...
   All projects are up-to-date for restore.
   CalculatorEndToEndTests -> /Users/rami/projects/swe-3643-spring-2024-project/src/Calculator/CalculatorEndToEndTests/bin/Debug/net8.0/CalculatorEndToEndTests.dll
