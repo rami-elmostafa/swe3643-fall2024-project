@@ -121,7 +121,7 @@ To prepare your environment to execute this application:
 
      **The output should look like the following:**
 
-     ```bash $ dotnet test
+     ```bash 
      $ dotnet test
      
      Starting test execution, please wait...
