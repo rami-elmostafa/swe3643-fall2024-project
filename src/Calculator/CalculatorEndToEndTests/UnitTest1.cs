@@ -3,7 +3,7 @@ using Microsoft.Playwright;
 
 namespace CalculatorEndToEndTests;
 
-[Parallelizable(ParallelScope.None)]
+[Parallelizable(ParallelScope.Self)]
 [TestFixture]
 public class Tests : PageTest
 {
@@ -36,7 +36,8 @@ public class Tests : PageTest
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Sample Standard Deviation | one value per line" }).ClickAsync();
-
+        await Task.Delay(1000);
+        
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Sample Standard Deviation\n3.0607876523260447"));
@@ -62,7 +63,8 @@ public class Tests : PageTest
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Population Standard Deviation | one value per line" }).ClickAsync();
-
+        await Task.Delay(1000);
+        
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Invalid input: No data provided. Please enter one value per line."));
@@ -88,7 +90,8 @@ public class Tests : PageTest
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Sample Standard Deviation | one value per line" }).ClickAsync();
-
+        await Task.Delay(1000);
+        
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Invalid input: Please input more than one number"));
@@ -141,7 +144,8 @@ public class Tests : PageTest
 
         // Click the button to compute the mean
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Mean | one value per line" }).ClickAsync();
-
+        await Task.Delay(1000);
+        
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Mean\n7"), "The computed mean does not match the expected value.");
@@ -172,7 +176,8 @@ public class Tests : PageTest
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Z Score | value, mean, stdDev on one line" }).ClickAsync();
-
+        await Task.Delay(1000);
+        
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Z-Score\n-0.49006993309715474"));
@@ -198,7 +203,7 @@ public class Tests : PageTest
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Compute Single Linear Regression Formula | one x,y pair per line" }).ClickAsync();
-
+        await Task.Delay(1000);
         // Debugging: Verify the textarea content
         var textareaContent = await Page.GetByRole(AriaRole.Textbox).InputValueAsync();
         Assert.That(textareaContent, Is.EqualTo(inputData), "The input data was not filled correctly in the textarea.");
@@ -228,7 +233,7 @@ public class Tests : PageTest
 
         // Click the button to compute sample standard deviation
         await Page.GetByRole(AriaRole.Button, new() { Name = "Predict Y from Linear Regression Formula | x, m, b on one line" }).ClickAsync();
-
+        await Task.Delay(1000);
         // Verify the alert message content
         var alertMessage = await Page.Locator("div.alert").TextContentAsync();
         Assert.That(alertMessage, Is.EqualTo("Single Linear Regression Prediction: \n6.65784"));
