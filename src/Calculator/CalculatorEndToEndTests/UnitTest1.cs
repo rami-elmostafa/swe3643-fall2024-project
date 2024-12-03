@@ -3,7 +3,7 @@ using Microsoft.Playwright;
 
 namespace CalculatorEndToEndTests;
 
-[Parallelizable(ParallelScope.Self)]
+[Parallelizable(ParallelScope.None)]
 [TestFixture]
 public class Tests : PageTest
 {
